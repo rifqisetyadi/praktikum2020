@@ -1,0 +1,126 @@
+---
+title: "Latihan 1_123190149_M Rifqi Setyadi"
+author: "iqi"
+date: "17/09/2021"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+# Dasar Teori 
+
+Variasi tipe data pada R memfasilitasi keberagaman jenis variabel data. Sebagai contoh, terdapat data yang terdiri dari sekumpulan angka dan data lain yang berisi sekumpulan karakter. Pada contoh lain, ada pula data yang berbentuk tabel maupun kumpulan (list) angka sederhana. 
+
+Dengan bantuan fungsi class, kita akan mendapatkan kemudahan dalam mendefinisikan tipe data yang kita miliki:
+
+```{R}
+a <- 2
+class(a)
+```
+
+# Data Frames
+
+Cara paling umum yang dapat digunakan untuk menyimpan dataset dalam R adalah dalam tipe data frame. Secara konseptual, kita dapat menganggap data frame sebagai tabel yang terdiri dari baris yang memiliki nilai pengamatan dan berbagai variabel yang didefinisikan dalam bentuk kolom. Tipe data ini sangat umum digunakan untuk dataset, karena data frame dapat menggabungkan berbagai jenis tipe data dalam satu objek.
+
+Contoh dataset pada library(dslabs) dan pilih dataset “murders” 
+menggunakan fungsi data:
+
+```{R}
+library(dslabs)
+data(murders)
+```
+
+Untuk memastikan bahwa dataset tersebut tipenya adalah data frame, dapat digunakan perintah berikut:
+
+```{R}
+class(murders)
+```
+
+Untuk memeriksa lebih lanjut isi dataset, dapat pula digunakan fungsi str untuk mencari tahu lebih rinci mengenai struktur suatu objek:
+
+```{R}
+str(murders)
+```
+
+Dengan menggunakan fungsi str, dapat diketahui bahwa dataset “murders” terdiri dari 51 baris dan lima variabel: state, abb, region, population, dan total. Selanjutnya, untuk melihat contoh enam baris pertama pada dataset, dapat digunakan fungsi head:
+
+```{R}
+head(murders)
+```
+
+Untuk analisis awal tiap variabel yang diwakili dalam bentuk kolom pada tipe data frame, dapat digunakan operator aksesor ($) dengan cara berikut:
+ ```{R}
+ murders$population
+ ```
+ 
+Untuk mengetahui nama-nama dari lima variabel yang dapat dievaluasi menggunakan operator aksesor, sebelumnya, melalui fungsi str, telah kita ketahui bahwa variabel yang dimiliki dataset adalah: state, abb, region, population, dan total. Sebagai alternatif, terdapat pula fungsi name, yang dapat digunakan seperti contoh dibawah ini:
+
+```{R}
+names(murders)
+```
+
+# Vector : Numeric, character, dan logical
+
+Untuk mengidentifikasi banyaknya entri dalam suatu vector dapat digunakan fungsi length seperti contoh berikut:
+
+```{R}
+length(murders$population)
+```
+
+Vector khusus ini bertipe numeric karena populasi terdiri dari data-data angka:
+
+ ```{R}
+ class(murders$population)
+ ```
+
+Vector juga dapat digunakan untuk menyimpan string dengan tipe character, Sebagai contoh nama negara pada dataset “murders”:
+
+```{R}
+class(murders$state)
+```
+
+Jenis vector penting lainnya adalah logical yang nilainya berupa TRUE atau FALSE
+
+```{R}
+z <- 3 == 2
+z
+class(z)
+```
+
+
+# Factors
+
+Dalam dataset “murders”, variabel state yang berisi data karakter bukan bertipe vector character, namun, tipe datanya adalah factor:
+
+```{R}
+class(murders$region)
+```
+
+Faktor berguna untuk menyimpan data kategorikal. Dapat dilihat, bahwa hanya terdapat 4 wilayah pada variabel state. Untuk melihat jumlah kategori yang dimiliki oleh variabel dengan tipe data factor dapat digunakan fungsi level: 
+
+```{R}
+levels(murders$region)
+```
+
+# List
+
+Data frame merupakan sekumpulan list yang memiliki kelas yang berbeda-beda. Sama halnya dengan data frame, analisis list dapat dilakukan dengan menggunakan operator aksesor ($) dan dua kurung siku ([[). 
+
+
+# Matriks
+
+Matriks merupakan tipe data yang mirip dengan data frame karena keduanya memiliki dua dimensi, yaitu: baris dan kolom. Namun, sama halnya dengan tipe data vector numerik, karakter dan logis, entri dalam matriks harus terdiri dari jenis vector yang sama. Dalam hal ini, data frame dapat dikatakan sebagai tipe data yang paling cocok untuk menyimpan data, karena kita dapat memiliki karakter, faktor, dan angka sekaligus dalam satu data frame. Namun matriks memiliki 
+satu keunggulan yang tidak dimiliki oleh tipe data frame: pada matriks dapat dilakukan operasi aljabar. 
+
+Untuk mendefinisikan matriks, dapat digunakan fungsi matrix dengan mendefinisikan pula argumen berupa jumlah baris dan kolom yang diinginkan.
+
+```{R}
+mat <- matrix(1:12, 4, 3)
+mat
+```
+
+Untuk mengakses entri tertentu dalam matriks, dapat digunakan tanda kurung siku ([). Sebagai contoh, kita akan menampilkan data pada baris kedua, kolom ketiga, menggunakan:
+
+```{R}
+mat[2,3]
+```
