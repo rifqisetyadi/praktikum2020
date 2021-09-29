@@ -1,0 +1,71 @@
+---
+title: "Latihan3_123190149"
+author: "iqi"
+date: "29/09/2021"
+output: html_document
+---
+
+1. Mengurutkan data populasi dan menampilkan data terkecil dari populasi
+```{r}
+library(dslabs)
+data(murders)
+pop <- (murders$population)
+sort(pop)
+min(murders[["population"]])
+```
+
+2. Menampilkan indeks data terkecil dari populasi
+```{r}
+x <- (min(murders$population))
+order(x)
+```
+
+3. Menggunakan fungsi which.min untuk menampilkan indeks data terkecil dari populasi
+```{r}
+i_min <- which.min(murders$population) 
+i_min
+```
+
+4. Menmapilkan nama negara yang memiliki populasi terkecil
+```{r}
+i_min <- which.min(murders$population) 
+murders$state[i_min]
+```
+
+5. Menggunakan fungsi rank untuk menentukan peringkat populasi dan menyimpannya pada objek "ranks"
+```{r}
+ranks <- (murders$population)
+rank(ranks)
+```
+
+lalu membuat data frame baru "my_df" yang berisi nama negara dan peringkat populasinya
+```{r}
+rank <- (rank(ranks))
+state <- (murders$state)
+my_df <- data.frame(negara = state, peringkat = rank)
+```
+
+6. Membuat objek "ind" untuk mengurutkan my_df dengan menggunakan fungsi order
+```{r}
+ind <- order(my_df$peringkat)
+my_df$negara[ind]
+```
+
+7. Membuat plot dalam skala log10
+```{r}
+population_in_millions <- murders$population/log10(murders$population)
+total_gun_murders <- murders$total
+plot(population_in_millions, total_gun_murders )
+```
+
+8. Membuat histogram dari populasi negara bagian
+```{r}
+x <- (murders$population/10^6)
+hist(x)
+```
+
+9. Menghasilkan boxplot dari populasi negara berdasarkan wilayahnya
+```{r}
+murders$population <- with(murders, total / population * 100000) 
+boxplot(population~region, data = murders) 
+```
