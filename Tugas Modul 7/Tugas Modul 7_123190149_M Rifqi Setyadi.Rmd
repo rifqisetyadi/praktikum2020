@@ -1,0 +1,52 @@
+---
+title: "tugas modul 7"
+author: "iqi_123190149"
+date: "04/11/2021"
+output:
+  html_document: default
+  pdf_document: default
+---
+ 
+1. Menggunakan as_tibble untuk mengkonversi tabel dataset “US murders” dalam bentuk tibble dan menyimpannya dalam objek baru bernama ‘murders_tibble’
+```{r}
+library(dslabs)
+library(tidyverse)
+data(murders)
+as_tibble(murders) %>% class()
+murders_tibble <- as_tibble(murders) %>% class() 
+```
+
+2. Menggunakan fungsi group_by untuk mengkonversi dataset “US murders” menjadi sebuah tibble yang dikelompokkan berdasarkan ‘region’
+```{r}
+as_tibble(murders) %>% group_by(region)
+```
+
+3. Menggunakan operator pipe dan dot operator
+```{r}
+library(dslabs)
+library(dplyr)
+data(murders)
+murders %>% 
+     pull(population) %>% 
+     log %>%
+     mean %>% 
+     exp
+```
+
+4. 
+```{r}
+library(purrr)
+compute_s_n <- function(n){ 
+ x <- 1:n 
+ sum(x) 
+} 
+n <- 1:100 
+s_n <- sapply(n, compute_s_n)
+compute_s_n <- function(n){ 
+ x <- 1:n 
+ tibble(sum = sum(x)) 
+} 
+s_n <- map_df(n, compute_s_n)
+as_tibble(s_n)
+
+```
